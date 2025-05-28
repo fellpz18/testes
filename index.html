@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pedido Especial</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #ffebee;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            text-align: center;
+            background-image: linear-gradient(to bottom right, #ffcdd2, #f8bbd0);
+        }
+        
+        .container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            max-width: 500px;
+            width: 90%;
+        }
+        
+        h1 {
+            color: #d81b60;
+            margin-bottom: 20px;
+        }
+        
+        p {
+            color: #555;
+            font-size: 18px;
+            margin-bottom: 30px;
+        }
+        
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .btn {
+            padding: 12px 30px;
+            border: none;
+            border-radius: 50px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: bold;
+        }
+        
+        .btn-sim {
+            background-color: #4caf50;
+            color: white;
+        }
+        
+        .btn-sim:hover {
+            background-color: #388e3c;
+            transform: scale(1.05);
+        }
+        
+        .btn-nao {
+            background-color: #f44336;
+            color: white;
+            position: relative;
+        }
+        
+        .btn-nao:hover {
+            background-color: #d32f2f;
+        }
+        
+        .heart {
+            color: #d81b60;
+            font-size: 24px;
+            margin: 0 5px;
+        }
+        
+        @media (max-width: 480px) {
+            .container {
+                padding: 20px;
+            }
+            
+            h1 {
+                font-size: 24px;
+            }
+            
+            .btn {
+                padding: 10px 25px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Você quer namorar comigo? <span class="heart">❤</span></h1>
+        <p>Eu prometo fazer você feliz todos os dias!</p>
+        
+        <div class="buttons">
+            <button class="btn btn-sim" id="simBtn">SIM</button>
+            <button class="btn btn-nao" id="naoBtn">NÃO</button>
+        </div>
+    </div>
+
+    <script>
+        const simBtn = document.getElementById('simBtn');
+        const naoBtn = document.getElementById('naoBtn');
+        const container = document.querySelector('.container');
+        
+        // Redirecionar para link externo quando clicar em SIM
+        simBtn.addEventListener('click', function() {
+            window.location.href = 'https://www.youtube.com/watch?v=Uw5OLnN7UvM'; // Substitua pelo seu link
+        });
+        
+        // Fazer o botão NÃO fugir quando o mouse se aproximar
+        naoBtn.addEventListener('mouseover', function() {
+            moveButton();
+        });
+        
+        // Também mover quando clicar (caso o usuário consiga)
+        naoBtn.addEventListener('click', function() {
+            moveButton();
+        });
+        
+        function moveButton() {
+            const containerRect = container.getBoundingClientRect();
+            const containerWidth = containerRect.width;
+            const containerHeight = containerRect.height;
+            
+            // Gerar posições aleatórias dentro do container
+            const randomX = Math.floor(Math.random() * (containerWidth - naoBtn.offsetWidth));
+            const randomY = Math.floor(Math.random() * (containerHeight - naoBtn.offsetHeight));
+            
+            // Posicionar o botão
+            naoBtn.style.position = 'absolute';
+            naoBtn.style.left = randomX + 'px';
+            naoBtn.style.top = randomY + 'px';
+            
+            // Garantir que o botão não saia da tela em dispositivos móveis
+            if (window.innerWidth <= 480) {
+                const maxX = window.innerWidth - naoBtn.offsetWidth - 20;
+                const maxY = window.innerHeight - naoBtn.offsetHeight - 20;
+                
+                naoBtn.style.left = Math.min(randomX, maxX) + 'px';
+                naoBtn.style.top = Math.min(randomY, maxY) + 'px';
+            }
+        }
+    </script>
+</body>
+</html>
